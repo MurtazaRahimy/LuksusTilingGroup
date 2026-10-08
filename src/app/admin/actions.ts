@@ -19,7 +19,7 @@ export type ProjectFormState = { error?: string; values?: ProjectFormValues };
 async function processImageField(formData: FormData, field: string): Promise<string | undefined> {
   const file = formData.get(field);
   if (file instanceof File && file.size > 0) {
-    if (file.size > MAX_UPLOAD_BYTES) throw new Error(`${field}: file too large (max 15 MB).`);
+    if (file.size > MAX_UPLOAD_BYTES) throw new Error(`${field}: file too large (max 5 MB).`);
     if (!ACCEPTED_IMAGE_TYPES.includes(file.type)) throw new Error(`${field}: unsupported file type.`);
     return saveOptimizedImage(file);
   }
@@ -135,7 +135,7 @@ export async function addGalleryImage(
     return { error: "Please choose an image." };
   }
   if (file.size > MAX_UPLOAD_BYTES) {
-    return { error: "File too large (max 15 MB)." };
+    return { error: "File too large (max 5 MB)." };
   }
   if (!ACCEPTED_IMAGE_TYPES.includes(file.type)) {
     return { error: "Unsupported file type." };

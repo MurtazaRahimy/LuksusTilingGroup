@@ -129,7 +129,7 @@ export default function ContactForm() {
           accept="image/jpeg,image/png,image/webp,image/heic"
           className="w-full text-sm"
         />
-        <p className="text-xs text-ink/50 mt-1">JPEG, PNG, WebP or HEIC. Max 15 MB.</p>
+        <p className="text-xs text-ink/50 mt-1">JPEG, PNG, WebP or HEIC. Max 5 MB.</p>
       </div>
 
       <SubmitButton />

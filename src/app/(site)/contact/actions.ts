@@ -60,7 +60,7 @@ export async function submitEnquiry(_prevState: EnquiryFormState, formData: Form
   const photo = formData.get("photo");
   if (photo instanceof File && photo.size > 0) {
     if (photo.size > MAX_UPLOAD_BYTES) {
-      return { error: "Photo is too large (max 15 MB).", values };
+      return { error: "Photo is too large (max 5 MB).", values };
     }
     if (!ACCEPTED_IMAGE_TYPES.includes(photo.type)) {
       return { error: "Photo must be a JPEG, PNG, WebP, or HEIC image.", values };
