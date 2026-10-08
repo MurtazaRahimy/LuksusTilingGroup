@@ -1,0 +1,67 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+enum ServiceType {
+  TILING
+  SCREEDING
+  STONE
+  WATERPROOFING
+}
+
+enum ImageTag {
+  BEFORE
+  AFTER
+  NONE
+}
+
+model Project {
+  id          String        @id @default(cuid())
+  title       String
+  slug        String        @unique
+  suburb      String
+  type        ServiceType
+  summary     String
+  description String
+  scope       String
+  materials   String
+  duration    String
+  coverImage  String
+  coverAlt    String        @default("")
+  clientQuote String?
+  published   Boolean       @default(true)
+  featured    Boolean       @default(false)
+  sortOrder   Int           @default(0)
+  images      GalleryImage[]
+  createdAt   DateTime      @default(now())
+  updatedAt   DateTime      @updatedAt
+}
+
+model GalleryImage {
+  id        String   @id @default(cuid())
+  project   Project  @relation(fields: [projectId], references: [id], onDelete: Cascade)
+  projectId String
+  url       String
+  alt       String   @default("")
+  tag       ImageTag @default(NONE)
+  sortOrder Int      @default(0)
+  createdAt DateTime @default(now())
+}
+
+model Enquiry {
+  id          String   @id @default(cuid())
+  name        String
+  phone       String
+  email       String
+  suburb      String
+  jobType     String
+  description String
+  photoUrl    String?
+  status      String   @default("new")
+  createdAt   DateTime @default(now())
+}
