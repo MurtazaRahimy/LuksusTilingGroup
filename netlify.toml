@@ -4,3 +4,10 @@
 
 [build.environment]
   NODE_VERSION = "20"
+  # These are real secrets (set in Netlify's own Environment variables UI,
+  # never committed here) — but Next.js legitimately bakes them into its
+  # compiled server-only functions so server actions can read them at
+  # runtime. That trips Netlify's secrets scanner even though none of them
+  # are ever sent to the browser. DATABASE_URL in particular is just the
+  # placeholder "file:./dev.db" documented in README.md — not sensitive.
+  SECRETS_SCAN_OMIT_KEYS = "ADMIN_PASSWORD,CLOUDINARY_URL,DATABASE_URL"
