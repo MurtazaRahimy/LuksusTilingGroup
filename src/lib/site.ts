@@ -3,7 +3,7 @@ export const business = {
   tagline: "Tiling & Waterproofing",
   phone: "0480 378 474",
   phoneHref: "tel:0480378474",
-  email: "AliRazaEkhlasi@gmail.com",
+  email: "LuksustilingGroup@gmail.com",
   serviceArea: "Melbourne's eastern suburbs",
   yearsInBusiness: 6,
   hours: "Monday–Saturday, Sunday by appointment",
