@@ -3,12 +3,19 @@ export const business = {
   tagline: "Tiling & Waterproofing",
   phone: "0480 378 474",
   phoneHref: "tel:0480378474",
-  email: "Murtazaspamz@gmail.com",
+  email: "LuksustilingGroup@gmail.com",
   serviceArea: "Melbourne's eastern suburbs",
   yearsInBusiness: 6,
   hours: "Monday–Saturday, Sunday by appointment",
   licences: ["Licensed Tiler", "Licensed Waterproofer", "Fully Insured"],
 };
+
+// Where new-enquiry notification emails are sent. Separate from
+// business.email (which is shown publicly on the site) so this can point
+// at a test inbox without changing the public contact address — handy
+// while on Resend's sandbox sender, which can only deliver to the email
+// address you signed up to Resend with.
+export const notifyEmail = "murtazaspamz@gmail.com";
 
 export const SERVICE_TYPES = [
   { value: "TILING", label: "Tiling", description: "Floor and wall tiling for bathrooms, kitchens and living areas." },

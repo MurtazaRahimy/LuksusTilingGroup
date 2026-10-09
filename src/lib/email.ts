@@ -1,5 +1,5 @@
 import { Resend } from "resend";
-import { business } from "@/lib/site";
+import { business, notifyEmail } from "@/lib/site";
 
 const resend = process.env.RESEND_API_KEY ? new Resend(process.env.RESEND_API_KEY) : null;
 
@@ -19,7 +19,7 @@ export async function notifyNewEnquiry(enquiry: EnquiryNotification): Promise<vo
   try {
     await resend.emails.send({
       from: `${business.name} Website <onboarding@resend.dev>`,
-      to: business.email,
+      to: notifyEmail,
       replyTo: enquiry.email,
       subject: `New enquiry: ${enquiry.jobType} in ${enquiry.suburb}`,
       text: [
