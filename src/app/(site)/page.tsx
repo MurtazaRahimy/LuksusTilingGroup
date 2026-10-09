@@ -133,16 +133,15 @@ export default async function HomePage() {
         </div>
       </section>
 
-      {/* TESTIMONIALS PLACEHOLDER */}
+      {/* TESTIMONIAL */}
       <section className="py-18 sm:py-24 bg-muted">
         <div className="mx-auto max-w-6xl px-6">
           <div className="bg-primary text-white rounded-md p-10 sm:p-14 text-center">
             <p className="font-heading italic text-xl sm:text-2xl max-w-2xl mx-auto">
-              &ldquo;[Placeholder — a real client testimonial will go here once collected]&rdquo;
+              &ldquo;Simply amazing. Great service, great communication and everything finalised on time with
+              quality.&rdquo;
             </p>
-            <p className="mt-4 text-xs uppercase tracking-widest text-white/60">
-              Placeholder slot — not a real review
-            </p>
+            <p className="mt-4 text-xs uppercase tracking-widest text-white/60">— Previous Employer</p>
           </div>
         </div>
       </section>

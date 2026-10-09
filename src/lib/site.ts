@@ -5,7 +5,7 @@ export const business = {
   phoneHref: "tel:0480378474",
   email: "LuksustilingGroup@gmail.com",
   serviceArea: "Melbourne's eastern suburbs",
-  yearsInBusiness: 6,
+  yearsInBusiness: 4, // Luksus founded 2022
   hours: "Monday–Saturday, Sunday by appointment",
   licences: ["Licensed Tiler", "Licensed Waterproofer", "Fully Insured"],
 };

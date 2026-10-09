@@ -19,8 +19,15 @@ export default function AboutPage() {
           straight lines, solid falls, and waterproofing that actually holds up.
         </p>
         <p>
-          [Placeholder — add the real story here: how the business started, who&rsquo;s behind it, and what you
-          stand for. Keep it in plain, honest language — no corporate buzzwords.]
+          Luksus is a family-owned business that started in 2022. It&rsquo;s run mainly by Akbar Ekhlasi, who
+          brings experience in the trade going back to 1992 — over three decades of tiling and waterproofing work
+          across Melbourne before Luksus was its own name on the van.
+        </p>
+        <p>
+          That kind of experience shows in the details other businesses miss: falls that actually drain,
+          waterproofing that&rsquo;s done properly the first time, and tiling that still looks sharp years later.
+          Akbar started Luksus to do things his own way — honest pricing, real communication, and a standard of
+          work he&rsquo;d be happy to put his name on.
         </p>
       </div>
 
