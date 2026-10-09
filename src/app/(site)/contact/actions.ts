@@ -4,6 +4,7 @@ import { redirect } from "next/navigation";
 import { z } from "zod";
 import { prisma } from "@/lib/prisma";
 import { saveOptimizedImage, ACCEPTED_IMAGE_TYPES, MAX_UPLOAD_BYTES } from "@/lib/images";
+import { notifyNewEnquiry } from "@/lib/email";
 
 const enquirySchema = z.object({
   name: z.string().trim().min(1, "Name is required").max(120),
@@ -71,6 +72,8 @@ export async function submitEnquiry(_prevState: EnquiryFormState, formData: Form
   await prisma.enquiry.create({
     data: { ...parsed.data, photoUrl },
   });
+
+  await notifyNewEnquiry(parsed.data);
 
   redirect("/contact?success=1");
 }

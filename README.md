@@ -51,6 +51,8 @@ Photos are automatically resized and converted to a fast web format on upload �
 
 Every "Get a Quote" form submission appears in `/admin/enquiries`, with the customer's details, job description, and any photo they attached. You can mark each one as *contacted*, *quoted*, *won*, or *lost* to keep track.
 
+If `RESEND_API_KEY` is set (see **Deploying** below), you'll also get an email the moment a new enquiry comes in, sent to the address in `src/lib/site.ts` — reply to that email and it goes straight to the customer. Without that key, enquiries still save normally; you'd just need to check `/admin/enquiries` yourself.
+
 ## Before going live
 
 The site currently has 6 real projects loaded, covering all four services (Tiling, Screeding, Stone, Waterproofing), and a testimonial placeholder. Before going live:
@@ -61,15 +63,29 @@ The site currently has 6 real projects loaded, covering all four services (Tilin
 
 ## Deploying (making the site live on the internet)
 
-This project is built to deploy cleanly on **Vercel** (the company behind Next.js, and the simplest option), with one caveat:
+This site deploys on **Netlify**, using two free hosted services so nothing is lost when Netlify resets its disk between builds:
 
-> Vercel's servers don't keep local files between visits, so the SQLite database and uploaded photos would disappear. For a live site, swap in:
-> - A hosted database — easiest option is [Turso](https://turso.tech) (SQLite-compatible, free tier, minimal setup) or [Neon](https://neon.tech)/[Supabase](https://supabase.com) (Postgres). Update `DATABASE_URL` in `.env` and the `provider` in `prisma/schema.prisma` if you switch to Postgres.
-> - A place to store uploaded photos — [Cloudinary](https://cloudinary.com) or [Vercel Blob](https://vercel.com/docs/storage/vercel-blob) both have free tiers and are built for exactly this.
+- **[Turso](https://turso.tech)** — hosted SQLite, holds all projects, gallery photos metadata, and enquiries.
+- **[Cloudinary](https://cloudinary.com)** — stores photos uploaded through the admin area and contact form.
+- **[Resend](https://resend.com)** *(optional)* — emails you the moment a new enquiry comes in. Free plan, no domain verification needed since it only sends to your own inbox. Without it, enquiries still save fine, just silently.
 
-If instead you'd rather keep things as simple as possible, this app runs fine on any basic Linux server or VPS (e.g. a $5/month DigitalOcean droplet) with Node.js installed — in that case, the local file setup described above works as-is with no changes needed, since the server's files persist.
+Locally, none of these are needed — the app automatically falls back to the local SQLite file and `public/uploads/` folder when their environment variables aren't set.
 
-Whichever route you take, remember to change `ADMIN_PASSWORD` and `SESSION_SECRET` in `.env` to new values before going live, and never commit `.env` to a public code repository.
+Environment variables to set in Netlify's dashboard (**Site configuration → Environment variables**):
+
+| Variable | Purpose |
+|---|---|
+| `DATABASE_URL` | `file:./dev.db` (only so Prisma's build step doesn't complain — the live site actually uses Turso) |
+| `TURSO_DATABASE_URL` | From `turso db show <name> --url` |
+| `TURSO_AUTH_TOKEN` | From `turso db tokens create <name>` |
+| `CLOUDINARY_URL` | From the Cloudinary dashboard's "API Environment variable" |
+| `RESEND_API_KEY` | From the Resend dashboard — optional, skip to disable email notifications |
+| `ADMIN_PASSWORD` | A strong password, not `changeme123` |
+| `SESSION_SECRET` | A random string — generate with `node -e "console.log(require('crypto').randomBytes(32).toString('hex'))"` |
+
+If you'd rather skip the hosted-services setup entirely, this app also runs fine on any basic Linux VPS with Node.js installed (e.g. a $5/month DigitalOcean droplet) — there, the local SQLite file and `public/uploads/` folder work as-is, since the server's disk actually persists.
+
+Whichever route you take, remember to change `ADMIN_PASSWORD` and `SESSION_SECRET` to new values before going live, and never commit `.env` to a public code repository.
 
 ## Project structure (for a developer picking this up)
 
