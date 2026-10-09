@@ -34,7 +34,7 @@ export async function notifyNewEnquiry(enquiry: EnquiryNotification): Promise<vo
         `Description:`,
         enquiry.description,
         ``,
-        `View full details (and any attached photo) in the admin area under Enquiries.`,
+        `View full details in the admin area under Enquiries.`,
       ].join("\n"),
     });
   } catch (error) {

@@ -16,8 +16,7 @@ export default async function ContactPage({ searchParams }: { searchParams: Sear
     <div className="mx-auto max-w-5xl px-6 py-14 sm:py-20">
       <h1 className="font-heading font-bold text-4xl text-primary text-balance">Get a Quote</h1>
       <p className="text-ink/75 mt-3 max-w-xl">
-        Tell us about the job and we&rsquo;ll get back to you. Add a photo if you can — it helps us quote
-        accurately.
+        Tell us about the job and we&rsquo;ll get back to you.
       </p>
 
       <div className="mt-10 grid gap-10 sm:grid-cols-3">

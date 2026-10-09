@@ -49,7 +49,7 @@ Photos are automatically resized and converted to a fast web format on upload â€
 
 ## Viewing enquiries
 
-Every "Get a Quote" form submission appears in `/admin/enquiries`, with the customer's details, job description, and any photo they attached. You can mark each one as *contacted*, *quoted*, *won*, or *lost* to keep track.
+Every "Get a Quote" form submission appears in `/admin/enquiries`, with the customer's details and job description. You can mark each one as *contacted*, *quoted*, *won*, or *lost* to keep track.
 
 If `RESEND_API_KEY` is set (see **Deploying** below), you'll also get an email the moment a new enquiry comes in, sent to the address in `src/lib/site.ts` â€” reply to that email and it goes straight to the customer. Without that key, enquiries still save normally; you'd just need to check `/admin/enquiries` yourself.
 

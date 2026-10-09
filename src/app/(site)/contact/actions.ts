@@ -3,7 +3,6 @@
 import { redirect } from "next/navigation";
 import { z } from "zod";
 import { prisma } from "@/lib/prisma";
-import { saveOptimizedImage, ACCEPTED_IMAGE_TYPES, MAX_UPLOAD_BYTES } from "@/lib/images";
 import { notifyNewEnquiry } from "@/lib/email";
 
 const enquirySchema = z.object({
@@ -57,20 +56,8 @@ export async function submitEnquiry(_prevState: EnquiryFormState, formData: Form
     return { error: "Please fix the highlighted fields.", fieldErrors, values };
   }
 
-  let photoUrl: string | undefined;
-  const photo = formData.get("photo");
-  if (photo instanceof File && photo.size > 0) {
-    if (photo.size > MAX_UPLOAD_BYTES) {
-      return { error: "Photo is too large (max 5 MB).", values };
-    }
-    if (!ACCEPTED_IMAGE_TYPES.includes(photo.type)) {
-      return { error: "Photo must be a JPEG, PNG, WebP, or HEIC image.", values };
-    }
-    photoUrl = await saveOptimizedImage(photo);
-  }
-
   await prisma.enquiry.create({
-    data: { ...parsed.data, photoUrl },
+    data: parsed.data,
   });
 
   await notifyNewEnquiry(parsed.data);
